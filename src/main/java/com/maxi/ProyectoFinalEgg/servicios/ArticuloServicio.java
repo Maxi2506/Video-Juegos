@@ -9,6 +9,6 @@ package com.maxi.ProyectoFinalEgg.servicios;
  *
  * @author Maximiliano
  */
-public class articuloServicio {
+public class ArticuloServicio {
     
 }
