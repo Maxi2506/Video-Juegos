@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>PlayMax</title>     
+        <link th:replace="/fragments/head">
+        <link rel="stylesheet" href="/css/estilo-catalog.css">
+        <style>
+            html,body{   
+                background-image: url("/img/fondo.jpg");
+                background-attachment: fixed;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 90%;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <header id="header">
+            <div th:replace="/fragments/navbar"></div>
+        </header>
+        <div th:replace="/fragments/mainCatalogo"></div>
+</body>
+</html>
+

@@ -1,6 +1,9 @@
 package com.maxi.ProyectoFinalEgg.entidades;
 
+import com.maxi.ProyectoFinalEgg.enumeracion.Categoria;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -20,6 +23,17 @@ public class Articulo {
     private boolean alta;
     @ManyToOne
     private Proveedor proveedor;
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+    
 
     public String getId() {
         return id;
@@ -79,7 +93,7 @@ public class Articulo {
 
     @Override
     public String toString() {
-        return "Articulo{" + "id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + ", foto=" + foto + ", alta=" + alta + ", proveedor=" + proveedor + '}';
+        return "Articulo{" + "id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + ", foto=" + foto + ", alta=" + alta + ", proveedor=" + proveedor + ", categoria=" + categoria + '}';
     }
-    
+
 }

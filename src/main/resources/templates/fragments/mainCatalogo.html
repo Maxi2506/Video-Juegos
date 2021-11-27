@@ -1,0 +1,19 @@
+<master>
+    <div class="container bootstrap snipets" style="background-color: #ffffff" >
+        <h2 class="text-center text-info">Productos Destacados</h2>
+        <br>
+        <div class="row flow-offset-1 card clean-card text-center">
+            <div th:each="articulo : ${articulos}">
+                <div class="col-xs-6 col-md-4 clean-card ">
+                    <div class="product tumbnail thumbnail-3"><a href="#"><img th:src="${articulo.foto}"
+                                                                               style="width: 35rem; height: 28rem;" /></a>
+                        <div class="caption">
+                            <h5><a href="#" th:text="${articulo.nombre}"></a></h5>
+                            <p class="price sale">$ <span th:text="${articulo.precio}"></span>.</p>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</master>

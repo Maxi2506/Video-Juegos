@@ -22,7 +22,7 @@ public class UsuarioController {
 
         try {
             usuarioServicio.guardar(nombre, apellido, correo, password);
-            modelo.put("exito", "registro exitoso");
+            modelo.put("exito", "Bienvenido a la Bebop");
             return "index";
         }catch (WebException e) {
             modelo.put("error", e.getMessage());

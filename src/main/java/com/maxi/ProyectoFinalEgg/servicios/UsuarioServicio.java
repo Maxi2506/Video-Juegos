@@ -9,9 +9,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import com.maxi.ProyectoFinalEgg.enumeracion.Rol;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.http.HttpSession;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
-public class UsuarioServicio {
+public class UsuarioServicio implements UserDetailsService {
     
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
@@ -20,7 +30,7 @@ public class UsuarioServicio {
     public Usuario guardar(String nombre, String apellido, String correo,
             String password) throws WebException {
 
-//        validar(nombre, apellido, correo, clave, rol);
+//      validar(nombre, apellido, correo, clave, rol);
 
         Usuario entidad = new Usuario();
 
@@ -33,4 +43,21 @@ public class UsuarioServicio {
 
         return usuarioRepositorio.save(entidad);
     }
+    
+    @Override
+    public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
+        Usuario user = usuarioRepositorio.buscarPorEmail(correo);
+        if (user != null) {
+            List<GrantedAuthority> permissions = new ArrayList<>();
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + user.getRol().toString());
+            permissions.add(p);
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuario", user);
+            return new org.springframework.security.core.userdetails.User(user.getCorreo(), user.getPassword(),permissions);
+        }
+        return null;
+
+    }
+    
 }
